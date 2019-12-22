@@ -4,21 +4,21 @@
 package com.elcom.gasscale.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,7 +29,8 @@ import lombok.Setter;
  *
  */
 @Entity
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user")
@@ -49,10 +50,11 @@ public class User extends GeneralEntity implements Serializable {
 	@Column(name = "pwd", length = 100, nullable = false)
 	private String pwd;
 	
-//	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_role",
     joinColumns = @JoinColumn(name = "user_id"),
-    inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private List<Role> roles;
+    inverseJoinColumns = @JoinColumn(name = "role_id"), uniqueConstraints = @UniqueConstraint(columnNames = { "user_id", "role_id" }))
+	@JsonIgnoreProperties(value = {"users"})
+	private Set<Role> roles;
+	
 }

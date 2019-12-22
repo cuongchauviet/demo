@@ -1,8 +1,9 @@
 package com.elcom.gasscale.service.impl;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,6 +18,7 @@ import com.elcom.gasscale.entities.User;
 import com.elcom.gasscale.repository.UserRepository;
 
 @Service
+@Transactional
 public class JwtUserDetailsService implements UserDetailsService {
 	
 	@Autowired
@@ -27,7 +29,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 		User user = userRepository.findByPhone(username);
 		if (user != null && user.getPhone().equals(username)) {
 			Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-			List<Role> roles = user.getRoles();
+			Set<Role> roles = user.getRoles();
 			for (Role role : roles) {
 	            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
 	        }

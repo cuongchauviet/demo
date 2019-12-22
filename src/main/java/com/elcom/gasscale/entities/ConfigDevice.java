@@ -42,14 +42,14 @@ public class ConfigDevice extends GeneralEntity implements Serializable {
 	
 	@NotNull
 	@Column(name = "warning_percent_gas", length = 3, nullable = false)
-	@Max(value = 100, message = "Percent should not be greater than 100")
-	@Min(value = 0, message = "Percent should not be less than 0")
+	@Max(value = 100, message = "{validate.message.max}" + "100")
+	@Min(value = 0, message = "{validate.message.min}" + "0")
 	private short warningPercentGas;
 
 	@NotNull
 	@Column(name = "warning_percent_battery", length = 3, nullable = false)
-	@Max(value = 100, message = "Percent should not be greater than 100")
-	@Min(value = 0, message = "Percent should not be less than 0")
+	@Max(value = 100, message = "{validate.message.max}" + "100")
+	@Min(value = 0, message = "{validate.message.min}" + "0")
 	private short warningPercentBattery;
 	
 	@OneToOne(fetch = FetchType.LAZY)

@@ -28,30 +28,30 @@ public class GasTankDTO {
 	private int idUser;
 	
 	@NotBlank
-	@Size(min = 0, max = 100, message = "The gas tank name must be between {min} and {max} characters.")
+	@Size(min = 0, max = 100, message = "{validate.message.min.max}")
 	private String idGasTank;
 	
 	@NotNull
-	@Digits(integer = 10, message = "Must be length <= 10", fraction = 0)
+	@Digits(integer = 10, message = "{validate.message.length}" + "10", fraction = 0)
 	private int typeGasTank;
 	
 	@NotNull
-	@Digits(integer = 5, message = "Must be length <= 5", fraction = 1)
+	@Digits(integer = 5, message = "{validate.message.length}" + "5", fraction = 1)
 	private float residualGasTank;
 	
 	@NotNull
-	@Range(min = 0, max = 100, message = "The Percent must be between {min} and {max} characters.")
+	@Range(min = 0, max = 100, message = "{validate.message.min.max}")
 	private int residualBattery;
 	
 	@NotNull
-	@Digits(integer = 10, message = "Must be length <= 10", fraction = 0)
+	@Digits(integer = 10, message = "{validate.message.length}" + "10", fraction = 0)
 	private int replateTime;
 	
 	@NotNull
-	@Digits(integer = 10, message = "Must be length <= 10", fraction = 0)
+	@Digits(integer = 10, message = "{validate.message.length}" + "10", fraction = 0)
 	private int createTime;
 	
 	@NotNull
-	@Digits(integer = 10, message = "Must be length <= 10", fraction = 0)
+	@Digits(integer = 10, message = "{validate.message.length}" + "10", fraction = 0)
 	private int updateTime;
 }

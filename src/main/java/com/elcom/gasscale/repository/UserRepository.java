@@ -16,7 +16,9 @@ import com.elcom.gasscale.entities.User;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
+	
 	User findByPhone(String phone);
 	
 	List<User> findAll();
+	
 }

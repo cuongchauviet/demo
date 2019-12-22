@@ -23,20 +23,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TypeGasTankDTO {
 	@NotBlank
-    @Size(min = 0, max = 100, message = "The name Gas Tank must be between {min} and {max} characters.")
+    @Size(min = 0, max = 100, message = "{validate.message.min.max}")
     private String nameGasTank;
 	
 	@NotNull
-	@Digits(integer = 5, fraction = 1, message = "Must be length <= 5")
+	@Digits(integer = 5, fraction = 1, message = "{validate.message.length}" + "5")
 	private float weightCrustGasTank;
 	
 	@NotNull
-	@Digits(integer = 5, fraction = 1, message = "Must be length <= 5")
+	@Digits(integer = 5, fraction = 1, message = "{validate.message.length}" + "5")
 	private float weightInsidesGasTank;
 	
-	@Digits(integer = 10, message = "Must be length <= 10", fraction = 0)
+	@Digits(integer = 10, message = "{validate.message.length}" + 10, fraction = 0)
 	private long createTime;
     
-	@Digits(integer = 10, message = "Must be length <= 10", fraction = 0)
+	@Digits(integer = 10, message = "{validate.message.length}" + 10, fraction = 0)
 	private long updateTime;
 }

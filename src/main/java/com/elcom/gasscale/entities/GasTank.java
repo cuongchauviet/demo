@@ -61,7 +61,7 @@ public class GasTank extends GeneralEntity implements Serializable {
 	
 	@NotNull
 	@Column(name = "residual_battery", nullable = false)
-	@Range(min = 0, max = 100, message = "The residualBattery must be between {min} and {max} characters.") 
+	@Range(min = 0, max = 100, message = "{validate.message.min.max}") 
 	private int residualBattery;
 	
 	@NotNull

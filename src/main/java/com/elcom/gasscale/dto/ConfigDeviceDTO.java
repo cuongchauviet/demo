@@ -25,25 +25,19 @@ import lombok.NoArgsConstructor;
 public class ConfigDeviceDTO {
 	
 	@NotNull
-//    @Size(min = 0, max = 3, message = "Percent gas warning must be between {min} and {max} characters.")
-//	@Min(value = 0, message = "Percent gas warning should not be less than 0")
-//	@Max(value = 100, message = "Percent gas warning should not be greater than 100")
-	@Range(min = 0, max = 100, message = "The Percent gas warning must be between {min} and {max} characters.") 
+	@Range(min = 0, max = 100, message = "{validate.message.min.max}") 
     private short warningPercentGas;
 	
 	@NotNull
-//    @Size(min = 0, max = 3, message = "Percent battery warning must be between {min} and {max} characters.")
-//	@Min(value = 0, message = "Percent battery warning should not be less than 0")
-//	@Max(value = 100, message = "Percent battery warning should not be greater than 100")
-	@Range(min = 0, max = 100, message = "The Percent battery warning must be between {min} and {max} characters.") 
+	@Range(min = 0, max = 100, message = "{validate.message.min.max}") 
     private short warningPercentBattery;
 	
 	@NotNull
-	@Digits(integer = 10, message = "Must be length <= 10", fraction = 0)
-	@Min(value = 1, message = "Percent gas warning should not be less than 0")
+	@Digits(integer = 10, message = "{validate.message.length}" + "10", fraction = 0)
+	@Min(value = 1, message = "{validate.message.min}" + "0")
     private long idTypeGasTank;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Digits(integer = 10, message = "Must be length <= 10", fraction = 0)
+	@Digits(integer = 10, message = "{validate.message.length}" + "10", fraction = 0)
 	private long updateTime;
 }

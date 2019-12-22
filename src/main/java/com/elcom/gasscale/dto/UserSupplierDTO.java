@@ -21,17 +21,17 @@ import lombok.NoArgsConstructor;
 public class UserSupplierDTO {
 	
 	@NotBlank
-    @Size(min = 10, max = 10, message = "The phone number must be between {min} and {max} characters.")
-	@Pattern(regexp="(^$|[0-9]{10})",message = "The phone must be number and length is 10 characters.")
+    @Size(min = 10, max = 10, message = "{validate.message.min.max}")
+	@Pattern(regexp="(^$|[0-9]{10})", message = "{validate.message.number}")
     private String phone;
 	
 	@NotBlank
-    @Size(min = 0, max = 100, message = "The full name must be between {min} and {max} characters.")
+    @Size(min = 0, max = 100, message = "{validate.message.min.max}")
 	private String fullName;
 	
-    @Size(min = 0, max = 255, message = "The address name must be between {min} and {max} characters.")
+    @Size(min = 0, max = 255, message = "{validate.message.min.max}")
 	private String address;
 	
-    @Size(min = 0, max = 1000, message = "The note must be between {min} and {max} characters.")
+    @Size(min = 0, max = 1000, message = "{validate.message.min.max}")
 	private String note;
 }

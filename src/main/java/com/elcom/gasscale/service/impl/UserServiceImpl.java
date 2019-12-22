@@ -4,9 +4,8 @@
 package com.elcom.gasscale.service.impl;
 
 
+import java.util.HashSet;
 import java.util.List;
-
-import javax.persistence.EntityManager;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.elcom.gasscale.dto.UserDTO;
+import com.elcom.gasscale.entities.Role;
 import com.elcom.gasscale.entities.User;
 import com.elcom.gasscale.exception.ResourceNotFoundException;
 import com.elcom.gasscale.repository.RoleRepository;
@@ -28,12 +28,11 @@ import com.elcom.gasscale.service.UserService;
 //@Transactional
 public class UserServiceImpl implements UserService {
 	
-	private UserRepository userRepository;
+	private final UserRepository userRepository;
 	
-	private final EntityManager entityManager;
-	
-	public UserServiceImpl(EntityManager entityManager) {
-		this.entityManager = entityManager;
+	@Autowired
+	public UserServiceImpl(UserRepository userRepository) {
+		this.userRepository = userRepository;
 	}
 	
 	@Autowired
@@ -62,32 +61,14 @@ public class UserServiceImpl implements UserService {
 		if(userDTO == null) {
 			throw new ResourceNotFoundException("user is null");
 		}
-//		Role role = roleRepository.findByName(userDTO.getRole());
-//		HashSet<Role> roles = new HashSet<>();
-//        roles.add(roleRepository.findByName(userDTO.getRole()));	            
-//		User user = modelMapper.map(userDTO, User.class);
-//		user.setRoles(roles);
-//		user.setPwd(passwordEncoder.encode(userDTO.getPwd()));
-//		
-//		User userResult = userRepository.save(user);
-
 		User userResult = null;
 		if(userRepository.findByPhone(userDTO.getPhone()) == null) {
-//			User user = new User();
-//			user.setPhone(userDTO.getPhone());
-//			user.setPwd(userDTO.getPwd());
-//			user.setFullName(userDTO.getFullName());
-////			user.setCreateTime((int)userDTO.getCreateTime());
-////			user.setUpdateTime((int)userDTO.getUpdateTime());
-//			
-//			HashSet<Role> roles = new HashSet<>();
-//			roles.add(roleRepository.findByName(userDTO.getRole()));
-//			user.setRoles(roles);
-//			try {
-//				userResult = userRepository.save(user);
-//			} catch (IllegalArgumentException e) {
-//				System.out.println("ee" + e);
-//			}
+			User user = modelMapper.map(userDTO, User.class);
+			HashSet<Role> roles = new HashSet<>();
+			roles.add(roleRepository.findByName(userDTO.getRole()));
+			user.setRoles(roles);
+			user.setPwd(passwordEncoder.encode(userDTO.getPwd()));
+			userResult = userRepository.save(user);
 		} else {
 			throw new ResourceNotFoundException("user exist.");
 		}
@@ -96,13 +77,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getAllUser() throws Exception {
-		List<User> users = null;
-		try {
-			users = userRepository.findAll();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return users;
+		return userRepository.findAll();
 	}
 
 }
