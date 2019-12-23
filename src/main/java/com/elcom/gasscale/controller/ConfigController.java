@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.elcom.gasscale.config.GeneralMessage;
 import com.elcom.gasscale.model.MdlConfigDevice;
 import com.elcom.gasscale.model.ResponseResult;
 import com.elcom.gasscale.service.ConfigDeviceService;
@@ -19,7 +20,7 @@ import com.elcom.gasscale.service.ConfigDeviceService;
  */
 @RestController
 @RequestMapping("api/config")
-public class ConfigController extends GeneralController {
+public class ConfigController extends GeneralMessage {
 	
 	private final ConfigDeviceService configDeviceService;
 	

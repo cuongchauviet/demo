@@ -51,7 +51,7 @@ public class UserCustomerServiceImpl implements UserCustomerService {
 
 	@Override
 	public List<UserCustomer> getAllUser() throws Exception {
-		return userCustomerRepository.findAll();
+		return userCustomerRepository.getAll();
 	}
 
 }

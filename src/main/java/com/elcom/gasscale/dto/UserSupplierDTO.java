@@ -3,6 +3,7 @@
  */
 package com.elcom.gasscale.dto;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -34,4 +35,7 @@ public class UserSupplierDTO {
 	
     @Size(min = 0, max = 1000, message = "{validate.message.min.max}")
 	private String note;
+    
+    @Digits(integer = 10, fraction = 0, message = "{validate.message.length}" + "10")
+	private long userSupplierId;
 }

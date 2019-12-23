@@ -6,7 +6,6 @@ package com.elcom.gasscale.controller;
 
 import javax.validation.Valid;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -16,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.elcom.gasscale.config.GeneralMessage;
 import com.elcom.gasscale.dto.TypeGasTankDTO;
-import com.elcom.gasscale.entities.TypeGasTank;
 import com.elcom.gasscale.model.ResponseResult;
 import com.elcom.gasscale.service.TypeGasTankService;
 
@@ -27,12 +26,9 @@ import com.elcom.gasscale.service.TypeGasTankService;
  */
 @RestController
 @RequestMapping("api/type-gas-tank")
-public class TypeGasTankController extends GeneralController {
+public class TypeGasTankController extends GeneralMessage {
 	
 	private final TypeGasTankService typeGasTankService;
-	
-	@Autowired
-	private ModelMapper modelMapper;
 	
 	@Autowired
 	public TypeGasTankController(TypeGasTankService typeGasTankService) {
@@ -44,8 +40,7 @@ public class TypeGasTankController extends GeneralController {
 		ResponseResult responseResult = new ResponseResult();
 		try {
 			if(!bindingResult.hasErrors()) {
-				TypeGasTank typeGasTank = modelMapper.map(typeGasTankDTO, TypeGasTank.class);
-				if(typeGasTankService.insertTypeGasTank(typeGasTank)) {
+				if(typeGasTankService.insert(typeGasTankDTO)) {
 					responseResult.setSuccess(true);
 					responseResult.setMessage(insertSuccess);
 				}else {
@@ -59,7 +54,6 @@ public class TypeGasTankController extends GeneralController {
 		} catch (Exception e) {
 			responseResult.setSuccess(false);
 			responseResult.setMessage(e.getMessage());
-			responseResult.setError(e);
 		}
 		return ResponseEntity.ok(responseResult);
 	} 

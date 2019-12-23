@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.elcom.gasscale.config.GeneralMessage;
 import com.elcom.gasscale.config.JwtTokenUtil;
 import com.elcom.gasscale.dto.LoginDTO;
 import com.elcom.gasscale.dto.UserDTO;
@@ -35,7 +36,7 @@ import com.elcom.gasscale.service.impl.JwtUserDetailsService;
  */
 @RestController
 @RequestMapping("api/user")
-public class UserController extends GeneralController {
+public class UserController extends GeneralMessage {
 	
 	private final UserService userService;
 
@@ -50,8 +51,8 @@ public class UserController extends GeneralController {
 		this.userService = userService;
 	}
 	
-	@GetMapping("/getUserById/{id}")
-	public ResponseEntity<ResponseResult> getUserById(@PathVariable int id){
+	@GetMapping("/getById/{id}")
+	public ResponseEntity<ResponseResult> getById(@PathVariable("id") int id){
 		ResponseResult responseResult = new ResponseResult();
 		try {
 			User user = userService.getUserById(id);
@@ -66,7 +67,6 @@ public class UserController extends GeneralController {
 		} catch (Exception e) {
 			responseResult.setSuccess(false);
 			responseResult.setMessage(e.getMessage());
-			responseResult.setError(e);
 		}
 		return ResponseEntity.ok(responseResult);
 	}
@@ -86,7 +86,6 @@ public class UserController extends GeneralController {
 		} catch (Exception e) {
 			responseResult.setSuccess(false);
 			responseResult.setMessage(e.getMessage());
-			responseResult.setError(e);
 		}
 		return ResponseEntity.ok(responseResult);
 	}
@@ -133,7 +132,6 @@ public class UserController extends GeneralController {
 		} catch (Exception e) {
 			responseResult.setSuccess(false);
 			responseResult.setMessage(e.getMessage());
-			responseResult.setError(e);
 		}
 		return ResponseEntity.ok(responseResult);
 	}

@@ -4,6 +4,7 @@
 package com.elcom.gasscale.dto;
 
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -23,9 +24,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class GasTankDTO {
 	
-	@NotNull
-	@Digits(integer = 10 , fraction = 0)
-	private int idUser;
+	@Digits(integer = 10, fraction = 0, message = "{validate.message.length}" + "10")
+	private long id;
 	
 	@NotBlank
 	@Size(min = 0, max = 100, message = "{validate.message.min.max}")
@@ -33,7 +33,12 @@ public class GasTankDTO {
 	
 	@NotNull
 	@Digits(integer = 10, message = "{validate.message.length}" + "10", fraction = 0)
-	private int typeGasTank;
+	private int TypeGasTank;
+	
+	@NotNull
+	@Digits(integer = 10 , fraction = 0)
+	@Min(value = 1, message = "{validate.message.min}" + " 1")
+	private int idUser;
 	
 	@NotNull
 	@Digits(integer = 5, message = "{validate.message.length}" + "5", fraction = 1)
@@ -54,4 +59,6 @@ public class GasTankDTO {
 	@NotNull
 	@Digits(integer = 10, message = "{validate.message.length}" + "10", fraction = 0)
 	private int updateTime;
+	
+	private TypeGasTankDTO typeGasTankDTO;
 }

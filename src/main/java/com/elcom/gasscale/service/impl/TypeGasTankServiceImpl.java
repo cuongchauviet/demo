@@ -3,9 +3,12 @@
  */
 package com.elcom.gasscale.service.impl;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.elcom.gasscale.config.GeneralMessage;
+import com.elcom.gasscale.dto.TypeGasTankDTO;
 import com.elcom.gasscale.entities.TypeGasTank;
 import com.elcom.gasscale.repository.TypeGasTankRepository;
 import com.elcom.gasscale.service.TypeGasTankService;
@@ -15,11 +18,13 @@ import com.elcom.gasscale.service.TypeGasTankService;
  *
  */
 @Service
-public class TypeGasTankServiceImpl implements TypeGasTankService {
+public class TypeGasTankServiceImpl extends GeneralMessage implements TypeGasTankService {
 	
 	@Autowired
 	private TypeGasTankRepository typeGasTankRepository;
 	
+	@Autowired
+	private ModelMapper modelMapper;
 	
 	@Override
 	public TypeGasTank getTopById() throws Exception {
@@ -28,13 +33,23 @@ public class TypeGasTankServiceImpl implements TypeGasTankService {
 	}
 
 	@Override
-	public boolean insertTypeGasTank(TypeGasTank typeGasTank) throws Exception {
-		// TODO Auto-generated method stub
-		if(typeGasTank != null) {
-			typeGasTankRepository.save(typeGasTank);
-			return true;
+	public boolean insert(TypeGasTankDTO typeGasTankDTO) throws Exception {
+		if(typeGasTankDTO == null) {
+			throw new Exception(messageFormDataNull);
 		}
-		return false;
+		TypeGasTank typeGasTank = modelMapper.map(typeGasTankDTO, TypeGasTank.class);
+		TypeGasTank  typeGasTankResult = typeGasTankRepository.save(typeGasTank);
+		return typeGasTankResult != null;
+	}
+
+	@Override
+	public TypeGasTank insertReturnResponse(TypeGasTankDTO typeGasTankDTO) throws Exception {
+		if(typeGasTankDTO == null) {
+			throw new Exception(messageFormDataNull);
+		}
+		TypeGasTank typeGasTank = modelMapper.map(typeGasTankDTO, TypeGasTank.class);
+		TypeGasTank  typeGasTankResult = typeGasTankRepository.save(typeGasTank);
+		return typeGasTankResult;
 	}
 
 }

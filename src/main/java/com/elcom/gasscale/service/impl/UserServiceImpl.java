@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.elcom.gasscale.config.GeneralMessage;
 import com.elcom.gasscale.dto.UserDTO;
 import com.elcom.gasscale.entities.Role;
 import com.elcom.gasscale.entities.User;
@@ -26,7 +27,7 @@ import com.elcom.gasscale.service.UserService;
  */
 @Service
 //@Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends GeneralMessage implements UserService {
 	
 	private final UserRepository userRepository;
 	
@@ -59,7 +60,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean insertUser(UserDTO userDTO) throws ResourceNotFoundException {
 		if(userDTO == null) {
-			throw new ResourceNotFoundException("user is null");
+			throw new ResourceNotFoundException(messageFormDataNull);
 		}
 		User userResult = null;
 		if(userRepository.findByPhone(userDTO.getPhone()) == null) {
@@ -70,7 +71,7 @@ public class UserServiceImpl implements UserService {
 			user.setPwd(passwordEncoder.encode(userDTO.getPwd()));
 			userResult = userRepository.save(user);
 		} else {
-			throw new ResourceNotFoundException("user exist.");
+			throw new ResourceNotFoundException(messageRecordExist);
 		}
 		return userResult != null ? true : false;
 	}

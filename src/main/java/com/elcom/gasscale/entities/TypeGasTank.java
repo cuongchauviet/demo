@@ -27,7 +27,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "type_gas_tank")
 public class TypeGasTank extends GeneralEntity implements Serializable {
-	
 	/**
 	 * 
 	 */

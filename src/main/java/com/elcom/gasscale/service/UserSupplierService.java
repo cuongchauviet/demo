@@ -18,4 +18,9 @@ public interface UserSupplierService {
 	public UserSupplier getUserSupplierById(int id) throws Exception;
 	
 	public boolean insertSupplier(UserSupplierDTO userSupplierDTO) throws Exception;
+	
+	public boolean updateSupplier(UserSupplierDTO userSupplierDTO) throws Exception;
+	
+	public boolean delete(int id) throws Exception;
+	
 }

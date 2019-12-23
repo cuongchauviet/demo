@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.elcom.gasscale.controller;
+package com.elcom.gasscale.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @Configuration
 @PropertySource("classpath:messages.properties")
-public class GeneralController {
+public class GeneralMessage {
 	//success
 	@Value("${insert.success}")
 	protected String insertSuccess;
@@ -45,5 +45,14 @@ public class GeneralController {
 	
 	@Value("${get.data.null}")
 	protected String getDataNull;
+	
+	@Value("${message.form.data.null}")
+	protected String messageFormDataNull;
+	
+	@Value("${message.record.not.exist}")
+	protected String messageRecordNotExist;
+	
+	@Value("${message.record.exist}")
+	protected String messageRecordExist;
 	
 }

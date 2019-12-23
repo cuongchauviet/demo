@@ -20,4 +20,8 @@ public interface GastankService {
 	public GasTank getGastankById(int id) throws Exception;
 	
 	public boolean insert(GasTankDTO gasTankDTO) throws Exception;
+	
+	public boolean update(GasTankDTO gasTankDTO) throws Exception;
+	
+	public boolean delete(int id) throws Exception;
 }

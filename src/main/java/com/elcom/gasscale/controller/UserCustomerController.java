@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.elcom.gasscale.config.GeneralMessage;
 import com.elcom.gasscale.entities.UserCustomer;
 import com.elcom.gasscale.model.ResponseResult;
 import com.elcom.gasscale.service.UserCustomerService;
@@ -21,7 +22,7 @@ import com.elcom.gasscale.service.UserCustomerService;
  */
 @RestController
 @RequestMapping("api/user-customer")
-public class UserCustomerController extends GeneralController {
+public class UserCustomerController extends GeneralMessage {
 	
 	private final UserCustomerService userCustomerService;
 	
@@ -45,7 +46,6 @@ public class UserCustomerController extends GeneralController {
 		} catch (Exception e) {
 			responseResult.setSuccess(false);
 			responseResult.setMessage(e.getMessage());
-			responseResult.setError(e);
 		}
 		return ResponseEntity.ok(responseResult);
 	}

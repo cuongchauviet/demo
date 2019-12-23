@@ -39,7 +39,7 @@ public class UserSupplier implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", length = 10, nullable = false)
+	@Column(name = "id", length = 10, nullable = false, unique = true)
 	private int id;
 	
 	@NotBlank
@@ -59,5 +59,5 @@ public class UserSupplier implements Serializable {
 	private String note;
 	
 	@Column(name="status")
-	private int status;
+	private short status;
 }

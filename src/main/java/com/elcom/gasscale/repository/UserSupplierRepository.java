@@ -19,6 +19,11 @@ import com.elcom.gasscale.entities.UserSupplier;
 @Repository
 public interface UserSupplierRepository extends JpaRepository<UserSupplier, Integer> {
 	
-//	@Query("select p from user_supplier p where p.status = :status")
-//	List<UserSupplier> getAllByStatus(@Param("status") Integer status);
+	@Query("select p from UserSupplier p where p.status = 0")
+	List<UserSupplier> getAllByStatusIsZero();
+	
+	UserSupplier findByPhone(String phone);
+	
+	@Query("select p from UserSupplier p where p.id = :id and p.status = 0")
+	UserSupplier getById(@Param("id") int id);
 }
